@@ -7,7 +7,7 @@ export const Navbar = () => {
       <h3 className='text-2xl font-bold font-mono'>Product API Fetching</h3>
       <div className='flex items-center mr-2 '>
         <NavLink to={"/"} className={({isActive}) => (isActive ? "active-text" : "inactive-text")} style={{marginRight:"10px"}} >Products</NavLink>
-        <h5>Categories</h5>
+        <NavLink to={"/categories"} className={({isActive}) => ( isActive ? "active-text" : "inactive-text" )}>Categories</NavLink>
       </div>
       <form action="" className='flex items-center justify-center'>
         <input type="text" name="" className='text-xl bg-transparent border-b-2 border-b-slate-300 focus:outline-none'/>

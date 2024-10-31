@@ -7,7 +7,7 @@ export const Categories = () => {
   // const [productByCat, setProductByCat] = useState([]);
 
   const [categories, setCategories] = useState([]);
-  const [products, setProducts]     = useState([]); // State to hold products
+  const [products, setProducts] = useState([]); // State to hold products
   const [selectedCategory, setSelectedCategory] = useState('All Products'); // State to hold selected category
 
   useEffect(() => {

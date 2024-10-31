@@ -27,14 +27,16 @@ export const CardComponent = ({title,url}) => {
     }
 
     return (
-        <section className='px-5 my-10'>
-            <h1 className='text-5xl font-bold text-mono text-black'>{title}</h1>
-            <div className='grid grid-cols-5 gap-5 mt-5'>
-                {
-                    types.map((type) => (
-                        <Card key={type.id} type={type} />
-                    ))
-                }
+        <section>
+            <div className='px-10 ml-10 my-10'>
+                <h1 className='text-5xl font-bold text-mono text-black'>{title}</h1>
+                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-5'>
+                    {
+                        types.map((type) => (
+                            <Card key={type.id} type={type} />
+                        ))
+                    }
+                </div>
             </div>
         </section>
     )
