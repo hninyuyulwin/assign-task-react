@@ -1,7 +1,24 @@
-import { MagnifyingGlassIcon } from '@heroicons/react/16/solid'
-import { NavLink } from 'react-router-dom'
+import { MagnifyingGlassIcon, ShoppingBagIcon } from '@heroicons/react/16/solid'
+import { Link, NavLink } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 
 export const Navbar = () => {
+  const [itemAmount, setItemAmount] = useState(0);
+
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem('cart');
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+
+  useEffect(() => {
+    if(cart){
+      const amount = cart.reduce((accumulator, currentItem) => {
+        return accumulator + currentItem.quantity;
+      },0);
+      setItemAmount(amount);
+    }
+  },[cart]);
+  
   return (
     <nav className='flex items-center justify-between bg-black text-white px-10 py-4'>
       <h3 className='text-2xl font-bold font-mono'>Product API Fetching</h3>
@@ -9,12 +26,14 @@ export const Navbar = () => {
         <NavLink to={"/"} className={({isActive}) => (isActive ? "active-text" : "inactive-text")} style={{marginRight:"10px"}} >Products</NavLink>
         <NavLink to={"/categories"} className={({isActive}) => ( isActive ? "active-text" : "inactive-text" )}>Categories</NavLink>
       </div>
-      <form action="" className='flex items-center justify-center'>
-        <input type="text" name="" className='text-xl bg-transparent border-b-2 border-b-slate-300 focus:outline-none'/>
-        <button type='submit'>
-        <MagnifyingGlassIcon className='w-8 h-8' />
-        </button>
-      </form>
+
+      <Link to={'/carts'}  className='cursor-pointer flex relative max-w-[50px]' >
+        <ShoppingBagIcon className='w-8 text-gray-400' />
+        <div className='bg-red-500 absolute -right-2 text-[12px] w-[18px] h-[18px] text-white rounded-full flex justify-center items-center'>
+          {itemAmount}
+        </div>
+      </Link>
+
     </nav>
   )
 }
