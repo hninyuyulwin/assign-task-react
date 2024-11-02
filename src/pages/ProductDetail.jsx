@@ -1,13 +1,16 @@
 import { BackwardIcon, ShoppingCartIcon } from '@heroicons/react/16/solid';
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { json, useNavigate, useParams } from 'react-router-dom'
 import { Navbar } from '../components/Navbar';
+import { CartContext } from '../contexts/CartConntext';
 
 export const ProductDetail = () => {
     const {id} = useParams(); 
     const [product, setProduct] = useState({});
     const navigate = useNavigate();
     // const [cart, setCart] = useState([]);
+    // const {addToCart} = useContext(CartContext);
+
     const [cart, setCart] = useState(() => {
         const savedCart = localStorage.getItem('cart');
         return savedCart ? JSON.parse(savedCart) : [];
@@ -50,7 +53,6 @@ export const ProductDetail = () => {
     }
 
     
-
   return (
     <>
         { 
@@ -71,7 +73,7 @@ export const ProductDetail = () => {
                                 <BackwardIcon className='w-5 h-5 mr-2 mt-1' />Go Back
                             </button>
 
-                            <button onClick={() => addToCart(product)} className='bg-blue-300 px-4 py-2 flex justify-center align-middle rounded-lg mt-3'> 
+                            <button onClick={() => addToCart(product,id)} className='bg-blue-300 px-4 py-2 flex justify-center align-middle rounded-lg mt-3'> 
                                 Add To Cart
                                 <ShoppingCartIcon className='w-5 h-5 ml-2 mt-1' />
                             </button>
@@ -79,9 +81,7 @@ export const ProductDetail = () => {
                             
                         </div>
                     </div>
-
                 </section>
-
             ) 
         }
     </>
