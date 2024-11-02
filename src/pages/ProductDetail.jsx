@@ -8,32 +8,20 @@ export const ProductDetail = () => {
     const {id} = useParams(); 
     const [product, setProduct] = useState({});
     const navigate = useNavigate();
-    // const [cart, setCart] = useState([]);
-    // const {addToCart} = useContext(CartContext);
+    const {addToCart} = useContext(CartContext);
 
+    useEffect(() => {
+        getProductById();
+    },[id]);
+    /*
     const [cart, setCart] = useState(() => {
         const savedCart = localStorage.getItem('cart');
         return savedCart ? JSON.parse(savedCart) : [];
     });
 
     useEffect(() => {
-        getProductById();
-    },[id]);
-
-
-    useEffect(() => {
         localStorage.setItem("cart",JSON.stringify(cart));  
     },[cart]);
-
-    const getProductById = async () => {
-        const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-        const data = await response.json();
-        setProduct(data);
-    }
-
-    const goBack = () => {
-        navigate(-1);
-    }
 
     const addToCart = (product) => {
         const newItem = {...product, quantity : 1};
@@ -51,7 +39,17 @@ export const ProductDetail = () => {
             setCart([...cart, newItem]);
         }
     }
+    */
 
+    const getProductById = async () => {
+        const response = await fetch(`https://fakestoreapi.com/products/${id}`);
+        const data = await response.json();
+        setProduct(data);
+    }
+
+    const goBack = () => {
+        navigate(-1);
+    }
     
   return (
     <>
@@ -73,7 +71,7 @@ export const ProductDetail = () => {
                                 <BackwardIcon className='w-5 h-5 mr-2 mt-1' />Go Back
                             </button>
 
-                            <button onClick={() => addToCart(product,id)} className='bg-blue-300 px-4 py-2 flex justify-center align-middle rounded-lg mt-3'> 
+                            <button onClick={() => addToCart(product,product.id)} className='bg-blue-300 px-4 py-2 flex justify-center align-middle rounded-lg mt-3'> 
                                 Add To Cart
                                 <ShoppingCartIcon className='w-5 h-5 ml-2 mt-1' />
                             </button>

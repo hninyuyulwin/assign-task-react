@@ -1,56 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext} from "react";
 import { Link } from "react-router-dom";
 import { MinusIcon, PlusIcon, TrashIcon } from "@heroicons/react/16/solid";
+import { CartContext } from "../contexts/CartConntext";
 
 const CartItem = ({ product }) => {
-  // const {id,title,image,price, quantity} = product;
-  const [cart, setCart] = useState(() => {
-    const savedCart = localStorage.getItem("cart");
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
-
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
-
-  const increaseQuantity = (id) => {
-    const cartItem = cart.find((item) => item.id == id);
-    if (cartItem) {
-      const newCart = cart.map((item) => {
-        if (item.id == id) {
-          return { ...item, quantity: cartItem.quantity + 1 };
-        } else {
-          return item;
-        }
-      });
-      setCart(newCart);
-    }
-  };
-
-  const decreaseQuantity = (id) => {
-    const cartItem = cart.find((item) => item.id == id);
-    if (cartItem) {
-      const newCart = cart.map((item) => {
-        if (item.id == id) {
-          return { ...item, quantity: cartItem.quantity - 1 };
-        } else {
-          return item;
-        }
-      });
-      setCart(newCart);
-    }
-    if (cartItem.quantity < 2) {
-      removeFromCart(id);
-    }
-  };
-
-  const removeFromCart = (id) => {
-    const newCart = cart.filter((item) => {
-      return item.id !== id;
-    });
-    setCart(newCart);
-  };
-
+  const {removeFromCart,decreaseQuantity,increaseQuantity} = useContext(CartContext);
+  
   return (
     <div>
       <div className="flex gap-x-4 py-2 xl:px-6 border-b border-gray-200 w-1/2 mx-auto font-light text-gray-500 p-10">

@@ -8,9 +8,11 @@ const CartProvider = ({children}) => {
   const [cart, setCart] = useState(() => {
     const savedCart = localStorage.getItem('cart');
     return savedCart ? JSON.parse(savedCart) : [];
-});
+  });
   const [itemAmount, setItemAmount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+
+  // useEffect(() => {},[cart]);
 
   useEffect(() => {
     localStorage.setItem("cart",JSON.stringify(cart));  
@@ -62,7 +64,8 @@ const CartProvider = ({children}) => {
   
   const clearAll = () => {
     setCart([]);
-    localStorage.removeItem('cart');
+    // localStorage.removeItem('cart');
+    localStorage.setItem("cart", JSON.stringify([]));
    }
 
   const increaseQuantity = (id) => {

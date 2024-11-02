@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import CartItem from "./CartItem";
 import { TrashIcon } from "@heroicons/react/20/solid";
+import { CartContext } from "../contexts/CartConntext";
 
 const ShoppingBag = () => {
-  // const {totalPrice,cart,clearAll} = useContext(CartConntext);
+  const {totalPrice,cart,clearAll} = useContext(CartContext);
 
-  const [totalPrice, setTotalPrice] = useState(0);
+  // const [totalPrice, setTotalPrice] = useState(0);
 
-  const [cart, setCart] = useState(() => {
-    const savedCart = localStorage.getItem("cart");
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
+  // const [cart, setCart] = useState(() => {
+  //   const savedCart = localStorage.getItem("cart");
+  //   return savedCart ? JSON.parse(savedCart) : [];
+  // });
 
-  useEffect(() => {
-    setCart(JSON.parse(localStorage.getItem("cart")));
-  }, []);
+  // useEffect(() => {
+  //   setCart(JSON.parse(localStorage.getItem("cart")));
+  // }, []);
 
+  /*
   useEffect(() => {
     // setCart(JSON.parse(localStorage.getItem('cart')));
     if (cart) {
@@ -25,11 +27,12 @@ const ShoppingBag = () => {
       setTotalPrice(amount);
     }
   }, [cart]);
+  */
 
-  const clearAll = () => {
-    setCart([]);
-    localStorage.setItem("cart", JSON.stringify([]));
-  };
+  // const clearAll = () => {
+  //   setCart([]);
+  //   localStorage.setItem("cart", JSON.stringify([]));
+  // };
 
   return (
     <div className="">
@@ -39,7 +42,10 @@ const ShoppingBag = () => {
       <div>
         <div>
           {cart &&
-            cart.map((item) => <CartItem key={item.id} product={item} />)}
+            cart.map((item) => (
+            <CartItem key={item.id} product={item} />
+          ))
+          }
         </div>
       </div>
       <div>

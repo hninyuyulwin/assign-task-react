@@ -1,15 +1,16 @@
-import { MagnifyingGlassIcon, ShoppingBagIcon } from '@heroicons/react/16/solid'
+import { ShoppingBagIcon } from '@heroicons/react/16/solid'
 import { Link, NavLink } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useContext } from 'react'
+import { CartContext } from '../contexts/CartConntext'
 
 export const Navbar = () => {
+  const {itemAmount} = useContext(CartContext);
+  /*
   const [itemAmount, setItemAmount] = useState(0);
-
   const [cart, setCart] = useState(() => {
     const savedCart = localStorage.getItem('cart');
     return savedCart ? JSON.parse(savedCart) : [];
   });
-
   useEffect(() => {
     if(cart){
       const amount = cart.reduce((accumulator, currentItem) => {
@@ -18,6 +19,7 @@ export const Navbar = () => {
       setItemAmount(amount);
     }
   },[cart]);
+  */
   
   return (
     <nav className='flex items-center justify-between bg-black text-white px-10 py-4'>
